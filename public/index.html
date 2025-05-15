@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solana Archery Duel</title>
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    body {
+      font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+    .container { text-align: center; padding: 20px; }
+    .intro-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: url('apple-archery-duel.png') no-repeat center center;
+      background-size: cover;
+      color: white;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .intro-screen h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+    .intro-screen p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+    .intro-screen button {
+      padding: 10px 20px;
+      font-size: 1.2em;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin: 10px;
+      transition: transform 0.2s;
+    }
+    .intro-screen button:hover {
+      transform: scale(1.1);
+    }
+    .game-container { display: none; }
+    canvas { background: #87CEEB; display: block; margin: 0 auto; }
+    .game-info {
+      margin: 20px 0;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+    }
+    .power-meter {
+      width: 200px;
+      height: 20px;
+      border: 2px solid #000;
+      margin: 10px auto;
+      background-color: #fff;
+    }
+    .power-fill {
+      height: 100%;
+      width: 0%;
+      background-color: #4CAF50;
+      transition: width 0.1s ease-out;
+    }
+    .status {
+      margin: 10px 0;
+      font-weight: bold;
+    }
+    .hidden {
+      display: none;
+    }
+    .leaderboard {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="intro-screen" id="intro-screen">
+      <h1>Apple Archery Duel</h1>
+      <p>Welcome to the ultimate archery challenge! Play offline or connect your wallet to stake funds.</p>
+      <button id="play-offline">Play Offline</button>
+      <button id="connect-wallet">Connect Wallet</button>
+    </div>
+
+    <div class="game-container" id="game-container">
+      <h1>Apple Archery Duel</h1>
+
+      <div class="game-info">
+        <div id="turn-status" class="status">Waiting for opponent...</div>
+        <div id="power-meter" class="power-meter">
+          <div id="power-fill" class="power-fill"></div>
+        </div>
+        <div id="angle-display" class="status">Angle: 0°</div>
+      </div>
+
+      <canvas id="game" width="800" height="400"></canvas>
+
+      <div class="game-info">
+        <div id="instructions" class="status">
+          Hold <strong>SPACE</strong> to power up, release to shoot.<br>
+          Use <strong>UP</strong>/<strong>DOWN</strong> arrows to adjust angle.
+        </div>
+      </div>
+
+      <div class="leaderboard" id="leaderboard">
+        <h2>Leaderboard</h2>
+        <p>Coming soon...</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.js"></script>
+  <script src="solana.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
